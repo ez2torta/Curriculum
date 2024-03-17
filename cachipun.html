@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        button{
+            color: blue;
+        }
+        div{
+            color: blue;
+        }
+        .contador{
+            color:green;
+        }
+        .mensaje{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+    <script>
+        var contadorPlayer1 = 0;
+        var contadorPlayer2 = 0;
+        var PIEDRA = 0;
+        var PAPEL = 1;
+        var TIJERA = 2;
+
+        function actualizarContador(){
+            document.getElementById('contador').innerText = `Player1 ${contadorPlayer1} - ${contadorPlayer2} CPU`
+
+        }
+        function empate(){
+            // gritar que hubo empate
+            document.getElementById('mensaje').innerText = "Acaba de haber un empate"
+            // mantener el contador
+            actualizarContador()
+
+        }
+        function ganaste(){
+            // gritar que ganaste
+            document.getElementById('mensaje').innerText = "Le ganaste a la CPU!"
+            contadorPlayer1 = contadorPlayer1 + 1;
+            // mantener el contador
+            actualizarContador()            
+        }
+        function perdiste(){
+            // gritar que perdiste
+            document.getElementById('mensaje').innerText = "Perdiste contra la CPU!"
+            contadorPlayer2 = contadorPlayer2 + 1;
+            // mantener el contador
+            actualizarContador() 
+        }
+
+        function randomIntFromInterval(min, max) { // min and max included 
+            return Math.floor(Math.random() * (max - min + 1) + min)
+        }
+
+        // Va a haber una función que se llame presionarPiedra() que resuelva para el jugador 1 piedra
+        function presionarPiedra(){
+            // ya jugó el player 1 piedra
+            // que va a jugar el player 2?
+            var player2 = randomIntFromInterval(0,2)
+            console.log("player2", player2)
+            if (player2 == PIEDRA){
+                // empate
+                empate();
+            }
+            else if (player2 == PAPEL){
+                // pierde
+                perdiste();
+            }
+            else{
+                // gana
+                ganaste();
+            }
+        }
+        // Va a haber una función que se llame presionarPapel() que resuelva para el jugador 1 papel
+        function presionarPapel(){
+            // ya jugó el player 1 piedra
+            // que va a jugar el player 2?
+            var player2 = randomIntFromInterval(0,2)
+            console.log("player2", player2)
+            if (player2 == PIEDRA){
+                // empate
+                ganaste();
+            }
+            else if (player2 == PAPEL){
+                // pierde
+                empate();
+            }
+            else{
+                // gana
+                perdiste();
+            }
+        }
+        // Va a haber una función que se llame presionarTijeras() que resuelva para el jugador 1 papel
+        function presionarTijeras(){
+            // ya jugó el player 1 piedra
+            // que va a jugar el player 2?
+            var player2 = randomIntFromInterval(0,2)
+            console.log("player2", player2)
+            if (player2 == PIEDRA){
+                // empate
+                perdiste();
+            }
+            else if (player2 == PAPEL){
+                // pierde
+                ganaste();
+            }
+            else{
+                // gana
+                empate();
+            }
+        }
+    </script>
+</head>
+<body>
+    <title>Cachipún</title>
+    <h1>Presione el botón del cachipún que quiera jugar.</h1>
+    <h2>La computadora va a jugar al azar, si tienes suerte le puedes ganar!</h2>
+    <h3 id="contador" class="contador">0</h3>
+    <button onclick="presionarPiedra()">🪨Piedra🪨</button>
+    <button onclick="presionarPapel()">📄Papel📄</button>
+    <button onclick="presionarTijeras()">✂️Tijeras✂️</button>
+    <h4 id="mensaje" class="mensaje">1</h3>
+</body>
+</html>
+
